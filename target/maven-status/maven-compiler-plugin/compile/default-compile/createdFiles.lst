@@ -1,0 +1,6 @@
+com\example\secureweb\config\SecurityConfig.class
+com\example\secureweb\service\ProductoService.class
+com\example\secureweb\model\Producto.class
+com\example\secureweb\controller\MainController.class
+com\example\secureweb\SecureWebApplication.class
+com\example\secureweb\config\SecurityConfig$1.class

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Panel de Administración</h1>
+                <p>Gestión de Productos</p>
+            </div>
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit">Cerrar Sesión</button>
+            </form>
+        </header>
+
+        <div class="admin-panel">
+            <div class="form-section">
+                <h2>Agregar Nuevo Producto</h2>
+                <form th:action="@{/admin/producto/agregar}" method="post">
+                    <div class="form-group">
+                        <input type="text" name="nombre" placeholder="Nombre del producto" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="descripcion" placeholder="Descripción del producto" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="precio" placeholder="Precio" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="imagen" placeholder="Nombre del archivo de imagen" required>
+                    </div>
+                    <button type="submit" class="btn-agregar">Agregar Producto</button>
+                </form>
+            </div>
+
+            <div class="productos-lista">
+                <h2>Productos Existentes</h2>
+                <div th:each="producto : ${productos}" class="producto-item">
+                    <div class="producto-info">
+                        <form th:action="@{/admin/producto/editar}" method="post">
+                            <input type="hidden" name="id" th:value="${producto.id}">
+                            <div class="form-group">
+                                <input type="text" name="nombre" th:value="${producto.nombre}">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="descripcion" th:text="${producto.descripcion}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="precio" th:value="${producto.precio}" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="imagen" th:value="${producto.imagen}">
+                            </div>
+                            <div class="producto-actions">
+                                <button type="submit" class="btn-actualizar">Actualizar</button>
+                            </div>
+                        </form>
+                        <!-- Formulario de eliminación separado -->
+                        <form th:action="@{/admin/producto/eliminar/{id}(id=${producto.id})}" method="post">
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

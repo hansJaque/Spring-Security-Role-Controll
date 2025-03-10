@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tienda de Cocina</title>
+    <link rel="stylesheet" th:href="@{/css/tienda.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Artículos de Cocina Premium</h1>
+                <p>Los mejores productos para tu cocina</p>
+            </div>
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit">Cerrar Sesión</button>
+            </form>
+        </header>
+
+        <div class="productos-grid">
+            <div th:each="producto : ${productos}" class="producto-card">
+                <img th:src="@{'/images/' + ${producto.imagen}}" th:alt="${producto.nombre}">
+                <div class="producto-info">
+                    <h3 th:text="${producto.nombre}">Nombre del Producto</h3>
+                    <p th:text="${producto.descripcion}">Descripción del Producto</p>
+                    <div class="precio">
+                        <span th:text="'$' + ${producto.precio}">Precio</span>
+                        <button class="btn-comprar">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
